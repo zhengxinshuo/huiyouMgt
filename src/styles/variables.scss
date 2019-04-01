@@ -14,12 +14,46 @@ $sideBarWidth: 210px;
 // the :export directive is the magic sauce for webpack
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 :export {
-  menuText: $menuText;
-  menuActiveText: $menuActiveText;
-  subMenuActiveText: $subMenuActiveText;
-  menuBg: $menuBg;
-  menuHover: $menuHover;
-  subMenuBg: $subMenuBg;
-  subMenuHover: $subMenuHover;
-  sideBarWidth: $sideBarWidth;
+    menuText: $menuText;
+    menuActiveText: $menuActiveText;
+    subMenuActiveText: $subMenuActiveText;
+    menuBg: $menuBg;
+    menuHover: $menuHover;
+    subMenuBg: $subMenuBg;
+    subMenuHover: $subMenuHover;
+    sideBarWidth: $sideBarWidth;
 }
+
+// 色彩倾向性颜色
+$c-theme: #409EFF;
+$c-primary: #409EFF;
+$c-success: #67C23A;
+$c-warning: #E6A23C;
+$c-danger: #F56C6C;
+$c-info: #909399;
+// 字体颜色
+$c-font-strong: #409EFF; //突出
+$c-font-title: #333; //标题
+$c-font-text: #333; //主要字体
+$c-font-sub-text: #606266; //次要字体
+$c-font-mark: #C0C4CC; //辅助性，标注，注释
+$c-font-th: #97A8BE; //表头
+$c-font-disable: #B2B2B2;
+// 背景/分割线颜色
+//背景 分割线
+$c-input-border: #DCDFE6;
+$c-border: #EAEAEA;
+$c-bg-disabled: #E4E4E8; //不可操作背景
+$c-bg-tooltip: #1F2D3D; //气泡
+// 字体尺寸
+$font-s: 12px;
+$font-m: 14px;
+$font-l: 16px;
+$font-xl: 18px;
+// 间距
+$spacing-sm: 10px;
+$spacing-md: 20px;
+$spacing-lg: 30px;
+
+$scrollbar-width: 8px;
+

@@ -10,25 +10,17 @@
                 size="small"
                 label-width="100px"
             >
-                <el-form-item label="活动编号" prop="activityId">
-                    <el-input v-model="form.activityId" placeholder="请输入活动编号"></el-input>
+                <el-form-item label="合同名称" prop="contractName">
+                    <el-input v-model="form.contractName" placeholder="请输入名的关键字"></el-input>
                 </el-form-item>
-                <el-form-item label="活动名称" prop="activityName">
-                    <el-input v-model="form.activityName" placeholder="请输入活动名称"></el-input>
+                <el-form-item label="合同编号" prop="contractId">
+                    <el-input v-model="form.contractId" placeholder="请输入合同编号"></el-input>
                 </el-form-item>
-                <el-form-item label="活动分类" prop="activityClassify">
-                    <el-select v-model="form.activityClassify" filterable>
-                        <el-option label="美食" value="美食"></el-option>
-                        <el-option label="生活" value="生活"></el-option>
-                        <el-option label="运动" value="运动"></el-option>
-                        <el-option label="节日" value="节日"></el-option>
-                        <el-option label="促销" value="促销"></el-option>
-                        <el-option label="美妆" value="美妆"></el-option>
-                        <el-option label="海淘" value="海淘"></el-option>
-                    </el-select>
+                <el-form-item label="乙方单位" prop="unitName">
+                    <el-input v-model="form.unitName" placeholder="请输乙方单位名称关键字"></el-input>
                 </el-form-item>
-                <el-form-item label="活动状态" prop="activityState">
-                    <el-select v-model="form.activityState" filterable>
+                <el-form-item label="合同状态" prop="contractState">
+                    <el-select v-model="form.contractState" filterable>
                         <el-option label="全部" value="全部"></el-option>
                         <el-option label="未开始" value="1"></el-option>
                         <el-option label="进行中" value="2"></el-option>
@@ -36,24 +28,24 @@
                         <el-option label="结束" value="4"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="关联货架" prop="contentId">
-                    <el-input v-model="form.contentId" placeholder="请输入关联的货架编号"></el-input>
+                <el-form-item label="合同类型" prop="contractClassify">
+                    <el-select v-model="form.contractClassify" filterable>
+                        <el-option label="类型一" value="1"></el-option>
+                    </el-select>
                 </el-form-item>
-                <el-form-item prop="startTime" class="date-wrapper" label="活动有效时间">
+                <el-form-item prop="time" label="合同签订日期">
                     <el-date-picker
-                        v-model="validTime"
-                        :default-time="['12:00:00','12:00:00']"
-                        type="datetimerange"
-                        start-placeholder="开始日期"
-                        end-placeholder="结束日期"
-                    ></el-date-picker>
+                        v-model="form.time"
+                        type="date"
+                        placeholder="选择日期">
+                    </el-date-picker>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">查询</el-button>
                     <el-button @click="resetForm('form')">重置</el-button>
                 </el-form-item>
             </el-form>
-            <el-button type="primary" size="small">新建活动</el-button>
+            <el-button type="primary" size="small" @click="add">新增</el-button>
             <el-table
                 v-loading="tableLoading"
                 :data="tableData"
@@ -61,32 +53,18 @@
                 class="table"
                 border
             >
-                <el-table-column prop="activityId" label="活动编号"></el-table-column>
-                <el-table-column prop="activityName" label="活动名称"></el-table-column>
-                <el-table-column prop="email" label="详情">
-                    <template slot-scope="scope">
-                        <el-button
-                            type="text"
-                            size="small"
-                        >查看
-                        </el-button>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="activityClassify" label="活动分类"></el-table-column>
-                <el-table-column label="开始时间">
-                    <template slot-scope="scope">{{ formatDateTime(scope.row.startTime) }}</template>
-                </el-table-column>
-                <el-table-column label="结束时间">
-                    <template slot-scope="scope">{{ formatDateTime(scope.row.endTime) }}</template>
-                </el-table-column>
-                <el-table-column label="状态">
-                    <template slot-scope="scope">{{ activityStateMap(scope.row.activityState) }}</template>
-                </el-table-column>
+                <el-table-column prop="contractId" label="合同编号"></el-table-column>
+                <el-table-column prop="contractName" label="合同名称"></el-table-column>
+                <el-table-column prop="contractClassify" label="合同类型"></el-table-column>
+                <el-table-column prop="unitName" label="乙方单位"></el-table-column>
+                <el-table-column prop="time" label="合同签订日期"></el-table-column>
+                <el-table-column prop="contractState" label="合同状态"></el-table-column>
                 <el-table-column prop="action" label="操作" fixed="right" width="280" fix>
                     <template slot-scope="scope">
-                        <el-button type="text" size="small" >删除</el-button>
-                        <el-button type="text" size="small" >编辑</el-button>
-                        <el-button type="text" size="small" >修改</el-button>
+                        <el-button type="text" size="small" @click="del(scope.row)">修改</el-button>
+                        <el-button type="text" size="small" @click="del(scope.row)">查看</el-button>
+                        <el-button type="text" size="small" @click="del(scope.row)">验收</el-button>
+                        <el-button type="text" size="small" @click="del(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -116,37 +94,47 @@ export default {
         return {
             validTime: [],
             form: {
-                contentId: '',
+                contractClassify: '',
+                unitName: '',
                 activityClassify: '',
-                activityName: '',
-                activityId: '',
-                activityState: '',
-                startTime: '',
-                endTime: ''
+                contractName: '',
+                contractId: '',
+                contractState: '',
+                time: ''
             },
 
             tableData: [],
         }
     },
-    watch: {
-        'validTime'(val) {
-            if (val) {
-                console.log(val)
-                this.form.startTime = val[0] ? val[0].toJSON() : ''
-                this.form.endTime = val[1] ? val[1].toJSON() : ''
-            } else {
-                this.form.startTime = ''
-                this.form.endTime = ''
-            }
-            this.$refs.form.validateField('startTime')
-        }
-    },
+    watch: {},
 
     created() {
         const me = this
         me.init()
     },
     methods: {
+        add(){
+        
+        },
+        del(data) {
+            this.$confirm('是否删除该合同？', {
+                confirmButtonText: '删除',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                })
+                this.getTableData()
+
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                })
+            })
+        },
         resetForm(formName) {
             this.$refs[formName].resetFields()
             if (formName === 'form') {
@@ -155,7 +143,7 @@ export default {
         },
         init() {
             const me = this
-            me.form.activityId = me.$route.params.id || ''
+            me.form.contractId = me.$route.params.id || ''
             me.getTableData()
 
         },
@@ -170,27 +158,19 @@ export default {
 
             setTimeout(()=>{
                 me.tableLoading = false
-                me.tableData = []
+                me.tableData = [
+                    {
+                        contractName: '合同名称',
+                        contractId: '编号1',
+                        contractClassify: '类型1',
+                        contractState: '进行中',
+                        time: '2018-01-21',
+                        unitName: '乙方单位'
+                    }
+                ]
                 me.page.totalCount = 100
             },500)
             
-        },
-        formatDateTime(str) {
-            try {
-                let dateTime = new Date(str)
-                let year = dateTime.getFullYear()
-                let month = dateTime.getMonth() + 1
-                let date = dateTime.getDate()
-                if (month < 10) month = '0' + month
-                if (date < 10) date = '0' + date
-                return `${year}-${month}-${date}`
-            } catch (e) {
-                this.$message({
-                    type: 'err',
-                    message: '时间格式出错'
-                })
-                return ''
-            }
         },
         onSubmit() {
             console.log(this.form)

@@ -8,7 +8,6 @@ export default {
     meta: { title: '合同管理', icon: 'activity-mgt' },
     children: [
         {
-
             path: 'contract-list',
             name: 'ContractList',
             component: () => import('@/views/contract-mgt/contract-list'),

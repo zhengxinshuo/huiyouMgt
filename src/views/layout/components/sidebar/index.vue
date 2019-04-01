@@ -17,7 +17,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import variables from '@/styles/variables.scss'
-import SidebarItem from './SidebarItem'
+import SidebarItem from './sidebar-item'
 
 export default {
     components: { SidebarItem },

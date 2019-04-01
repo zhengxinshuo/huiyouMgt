@@ -28,8 +28,8 @@
 <script>
 import path from 'path'
 import { isExternal } from '@/utils/validate'
-import Item from './Item'
-import AppLink from './Link'
+import Item from './item'
+import AppLink from './link'
 
 export default {
     name: 'SidebarItem',

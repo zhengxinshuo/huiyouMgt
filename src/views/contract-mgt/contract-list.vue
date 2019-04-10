@@ -114,7 +114,9 @@ export default {
     },
     methods: {
         add(){
-        
+            this.$router.push({
+                name:'ContractAdd'
+            })
         },
         del(data) {
             this.$confirm('是否删除该合同？', {

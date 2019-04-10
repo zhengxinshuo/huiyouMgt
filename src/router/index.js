@@ -8,7 +8,8 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '../views/layout/index'
-import contractMgt from './modules/contract-mgt'
+import ContractMgt from './modules/contract-mgt'
+import HomeMgt from './modules/home-mgt'
 
 
 // 同步路由，无需权限
@@ -131,8 +132,8 @@ export const asyncRouterMap = [
             }
         ]
     },
-
-    contractMgt,
+    HomeMgt,
+    ContractMgt,
     { path: '*', redirect: '/404', hidden: true }
 ]
 

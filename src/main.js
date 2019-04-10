@@ -5,11 +5,17 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/styles/index.scss' // global css
-
+import '@/styles/reset.css'
 import App from './App'
 import store from './store'
 import router from './router'
 
+
+import VCharts from 'v-charts'
+Vue.use(VCharts)
+
+import VeLine from 'v-charts/lib/line.common'
+Vue.component(VeLine.name, VeLine)
 import '@/icons' // icon
 import '@/permission' // permission control
 

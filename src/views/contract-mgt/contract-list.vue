@@ -62,7 +62,7 @@
                 <el-table-column prop="action" label="操作" fixed="right" width="280" fix>
                     <template slot-scope="scope">
                         <el-button type="text" size="small" @click="del(scope.row)">修改</el-button>
-                        <el-button type="text" size="small" @click="del(scope.row)">查看</el-button>
+                        <el-button type="text" size="small" @click="view(scope.row.contractId)">查看</el-button>
                         <el-button type="text" size="small" @click="del(scope.row)">验收</el-button>
                         <el-button type="text" size="small" @click="del(scope.row)">删除</el-button>
                     </template>
@@ -113,6 +113,14 @@ export default {
         me.init()
     },
     methods: {
+        view(id){
+            this.$router.push({
+                name:'ContractDetail',
+                query:{
+                    id:id
+                }
+            })
+        },
         add(){
             this.$router.push({
                 name:'ContractAdd'
@@ -163,7 +171,7 @@ export default {
                 me.tableData = [
                     {
                         contractName: '合同名称',
-                        contractId: '编号1',
+                        contractId: '123456',
                         contractClassify: '类型1',
                         contractState: '进行中',
                         time: '2018-01-21',

@@ -1,15 +1,17 @@
 <template>
     <div class="contract-add">
         <div class="page-add">
-            <div class="page-step">
-                <ul class="step-list">
-                    <li :class="{'active':step>0}" class="step">基本信息</li>
-                    <li :class="{'active':step>1}" class="step">硬件设备</li>
-                    <li :class="{'active':step>2}" class="step">软件系统</li>
-                    <li :class="{'active':step>3}" class="step">维保清单</li>
-                    <li :class="{'active':step>4}" class="step">技术服务</li>
-                </ul>
-            </div>
+            <sticky>
+                <div class="page-step">
+                    <ul class="step-list">
+                        <li :class="{'active':step>0}" class="step">基本信息</li>
+                        <li :class="{'active':step>1}" class="step">硬件设备</li>
+                        <li :class="{'active':step>2}" class="step">软件系统</li>
+                        <li :class="{'active':step>3}" class="step">维保清单</li>
+                        <li :class="{'active':step>4}" class="step">技术服务</li>
+                    </ul>
+                </div>
+            </sticky>
             <step-1 v-show="step===1"></step-1>
             <step-2 v-show="step===2"></step-2>
             <step-3 v-show="step===3"></step-3>
@@ -20,6 +22,7 @@
 </template>
 <script>
 import {mapState} from 'vuex'
+import Sticky from '@/components/sticky'
 import FormBox from './components/form-box'
 import Step1 from './components/step-1'
 import Step2 from './components/step-2'
@@ -27,9 +30,10 @@ import Step3 from './components/step-3'
 import Step4 from './components/step-4'
 import Step5 from './components/step-5'
 
+
 export default {
     name: 'EditActivity',
-    components: {FormBox, Step1,Step2,Step3,Step4,Step5},
+    components: {Sticky,FormBox, Step1,Step2,Step3,Step4,Step5},
     data() {
         return {
             whiteList: [],

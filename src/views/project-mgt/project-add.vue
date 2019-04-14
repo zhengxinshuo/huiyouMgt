@@ -28,7 +28,7 @@ export default {
     components: {Step, Sticky, FormBox, Step1, Step2, Step3, Step4, Step5},
     data() {
         return {
-            stepList: ['基本信息', '硬件设备', '软件系统', '维保清单', '技术服务'],
+            stepList: ['基本信息', '项目范围', '项目计划'],
             pageType: '1',
             activityId: '',
             loading: false,
@@ -105,7 +105,7 @@ export default {
         }
         .form-tip {
             color: #999;
-            margin-left: 20px;
+            margin-left: 10px;
         }
         
         .step-list {

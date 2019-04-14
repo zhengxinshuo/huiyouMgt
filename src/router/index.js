@@ -10,6 +10,7 @@ Vue.use(Router)
 import Layout from '../views/layout/index'
 import ContractMgt from './modules/contract-mgt'
 import HomeMgt from './modules/home-mgt'
+import ProjectMgt from './modules/project-mgt'
 
 
 // 同步路由，无需权限
@@ -134,6 +135,7 @@ export const asyncRouterMap = [
     },
     HomeMgt,
     ContractMgt,
+    ProjectMgt,
     { path: '*', redirect: '/404', hidden: true }
 ]
 

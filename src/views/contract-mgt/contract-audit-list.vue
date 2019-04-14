@@ -19,15 +19,6 @@
                 <el-form-item label="乙方单位" prop="unitName">
                     <el-input v-model="form.unitName" placeholder="请输乙方单位名称关键字"></el-input>
                 </el-form-item>
-                <el-form-item label="合同状态" prop="contractState">
-                    <el-select v-model="form.contractState" filterable>
-                        <el-option label="全部" value="全部"></el-option>
-                        <el-option label="未开始" value="1"></el-option>
-                        <el-option label="进行中" value="2"></el-option>
-                        <el-option label="暂停" value="3"></el-option>
-                        <el-option label="结束" value="4"></el-option>
-                    </el-select>
-                </el-form-item>
                 <el-form-item label="合同类型" prop="contractClassify">
                     <el-select v-model="form.contractClassify" filterable>
                         <el-option label="类型一" value="1"></el-option>
@@ -45,7 +36,6 @@
                     <el-button @click="resetForm('form')">重置</el-button>
                 </el-form-item>
             </el-form>
-            <el-button type="primary" size="small" @click="add">新增</el-button>
             <el-table
                 v-loading="tableLoading"
                 :data="tableData"
@@ -57,13 +47,10 @@
                 <el-table-column prop="contractName" label="合同名称"></el-table-column>
                 <el-table-column prop="contractClassify" label="合同类型"></el-table-column>
                 <el-table-column prop="unitName" label="乙方单位"></el-table-column>
-                <el-table-column prop="time" sortable label="合同签订日期"></el-table-column>
-                <el-table-column prop="contractState" label="合同状态"></el-table-column>
+                <el-table-column sortable prop="contractState" label="申请日期"></el-table-column>
                 <el-table-column prop="action" label="操作" fixed="right" width="280" fix>
                     <template slot-scope="scope">
-                        <el-button type="text" size="small" @click="del(scope.row)">修改</el-button>
-                        <el-button type="text" size="small" @click="view(scope.row.contractId)">查看</el-button>
-                        <el-button type="text" size="small" @click="del(scope.row)">验收</el-button>
+                        <el-button type="text" size="small" @click="del(scope.row)">审核</el-button>
                         <el-button type="text" size="small" @click="del(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
@@ -113,19 +100,7 @@ export default {
         me.init()
     },
     methods: {
-        view(id){
-            this.$router.push({
-                name:'ContractDetail',
-                query:{
-                    id:id
-                }
-            })
-        },
-        add(){
-            this.$router.push({
-                name:'ContractAdd'
-            })
-        },
+
         del(data) {
             this.$confirm('是否删除该合同？', {
                 confirmButtonText: '删除',
@@ -166,7 +141,7 @@ export default {
                 pageSize: me.page.pageSize
             }
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 me.tableLoading = false
                 me.tableData = [
                     {
@@ -179,20 +154,21 @@ export default {
                     }
                 ]
                 me.page.totalCount = 100
-            },500)
-            
+            }, 500)
+
         },
         onSubmit() {
             console.log(this.form)
             this.getTableData()
         }
-        
+
     },
 }
 </script>
 <style lang="scss" scoped>
     @import "../../styles/variables.scss";
     @import "../../styles/mixin.scss";
+    
     .table {
         margin-top: 20px;
     }

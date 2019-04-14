@@ -41,5 +41,17 @@ export default {
                 }
             }
         },
+        {
+            path: 'contract-draft-list',
+            name: 'ContractDraftList',
+            component: () => import('@/views/contract-mgt/contract-draft-list'),
+            meta: { title: '草稿箱' }
+        },
+        {
+            path: 'contract-audit-list',
+            name: 'ContractAuditList',
+            component: () => import('@/views/contract-mgt/contract-audit-list'),
+            meta: { title: '待审核' }
+        },
     ]
 }

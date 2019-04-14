@@ -12,8 +12,8 @@
                 <p class="tip"><span class="el-icon-warning"></span>提示：本页面所填写内容为合同条款中不涉及到具体资产设备的技术服务内容，如产品培训，网络巡检等</p>
                 <el-row class="form-row">
                     <el-col :span="12">
-                        <el-form-item :rules="{required:true,message:'请输入保质期'}" prop="name" label="保质期限">
-                            <el-input v-model="form.name" clearable></el-input>
+                        <el-form-item :rules="{required:true,message:'请输入保质期限'}" prop="name" label="保质期限">
+                            <el-input v-model="form.name" placeholder="请输入保质期限" clearable></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -30,7 +30,7 @@
                     <el-row>
                         <el-col :span="24">
                             <el-form-item label="技术服务">
-                                <el-input type="textarea"></el-input>
+                                <el-input placeholder="请输入" type="textarea"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>

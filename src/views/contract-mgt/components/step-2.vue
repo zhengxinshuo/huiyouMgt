@@ -12,8 +12,8 @@
                 <p class="tip"><span class="el-icon-warning"></span>提示：本页面所填写内容为合同中所购买的硬件设备清单</p>
                 <el-row class="form-row">
                     <el-col :span="12">
-                        <el-form-item :rules="{required:true,message:'请输入保质期'}" prop="name" label="保质期限">
-                            <el-input v-model="form.name" clearable></el-input>
+                        <el-form-item :rules="{required:true,message:'请输入保质期限'}" prop="name" label="保质期限">
+                            <el-input v-model="form.name" placeholder="请输入保质期限" clearable></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>

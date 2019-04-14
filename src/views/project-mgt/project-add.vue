@@ -1,5 +1,5 @@
 <template>
-    <div class="contract-add">
+    <div class="project-add">
         <div class="page-add">
             <sticky>
                 <step :data="stepList" :step="step"></step>
@@ -48,7 +48,7 @@ export default {
     },
     computed: {
         ...mapState({
-            step: state => state.contractMgt.step
+            step: state => state.projectMgt.step
         }),
     },
     watch: {
@@ -86,7 +86,7 @@ export default {
     @import "../../styles/variables";
     @import "../../styles/mixin";
     
-    .contract-add {
+    .project-add {
         
         .el-input {
             width: 170px;

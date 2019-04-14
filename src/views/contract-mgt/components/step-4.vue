@@ -15,7 +15,7 @@
                 <el-row class="form-row">
                     <el-col :span="12">
                         <el-form-item prop="name" label="服务期限">
-                            <el-input v-model="form.name" clearable></el-input>
+                            <el-input v-model="form.name" placeholder="请输入服务期限" clearable></el-input>
                             <span style="font-size: 14px;margin-left: 10px">个月</span>
                         </el-form-item>
                     </el-col>
@@ -56,7 +56,7 @@
                 <el-row class="form-row">
                     <el-col :span="12">
                         <el-form-item prop="name" label="服务期限">
-                            <el-input v-model="form.name" clearable></el-input>
+                            <el-input v-model="form.name" placeholder="请输入服务期限" clearable></el-input>
                             <span style="font-size: 14px;margin-left: 10px">个月</span>
                         </el-form-item>
                     </el-col>

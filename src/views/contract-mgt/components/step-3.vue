@@ -13,7 +13,7 @@
                 <el-row class="form-row">
                     <el-col :span="12">
                         <el-form-item :rules="{required:true,message:'请输入服务期'}" prop="name" label="服务期限">
-                            <el-input v-model="form.name" clearable></el-input>
+                            <el-input v-model="form.name" placeholder="请输入服务期" clearable></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>

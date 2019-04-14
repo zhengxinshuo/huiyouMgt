@@ -13,28 +13,36 @@
                 <el-row class="form-row">
                     <el-col :span="24">
                         <el-form-item :rules="{required:true,message:'请输入合同名称'}" prop="name" label="合同名称">
-                            <el-input v-model="form.name" class="short" clearable></el-input>
+                            <el-input v-model="form.name" placeholder="请输入合同名称" class="short" clearable></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row class="form-row">
                     <el-col :span="24">
                         <el-form-item :rules="{required:true,message:'请输入合同编号'}" prop="id" label="合同编号">
-                            <el-input clearable></el-input>
+                            <el-input placeholder="请输入合同编号" clearable></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row class="form-row">
                     <el-col :span="12">
                         <el-form-item :rules="{required:true,message:'请输入乙方单位'}" label="乙方单位">
-                            <el-input clearable></el-input>
+                            <el-input v-model="form.unitName" placeholder="请输入乙方单位" clearable>
+                                <el-button
+                                    slot="append"
+                                    icon="el-icon-search"
+                                    @click="addUnit"></el-button>
+                            </el-input>
                             <el-button type="text">新增</el-button>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="丙方单位">
-                            <el-input clearable>
-                                <el-button slot="append" icon="el-icon-search"></el-button>
+                            <el-input placeholder="请输入丙方单位" clearable>
+                                <el-button
+                                    slot="append"
+                                    icon="el-icon-search"
+                                    @click="dialogAddUnit.visible = true"></el-button>
                             </el-input>
                             <el-button type="text">新增</el-button>
                         </el-form-item>
@@ -112,7 +120,7 @@
                 <el-row class="form-row">
                     <el-col :span="24">
                         <el-form-item label="合同主要条款">
-                            <el-input type="textarea"></el-input>
+                            <el-input placeholder="请输入" type="textarea"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -121,7 +129,7 @@
                         <el-form-item label="服务响应时间">
                             <el-row :gutter="20">
                                 <el-col :span="10">
-                                    <el-input class="short"></el-input>
+                                    <el-input placeholder="请输入" class="short"></el-input>
                                 </el-col>
                                 <el-col :span="10">
                                     <el-select v-model="form.value" class="short" clearable>
@@ -135,7 +143,7 @@
                         <el-form-item label="故障解决时间">
                             <el-row :gutter="20">
                                 <el-col :span="10">
-                                    <el-input class="short"></el-input>
+                                    <el-input placeholder="请输入" class="short"></el-input>
                                 </el-col>
                                 <el-col :span="10">
                                     <el-select v-model="form.value" class="short" clearable>
@@ -209,7 +217,7 @@
                 <el-row class="form-row">
                     <el-col :span="24">
                         <el-form-item label="备注">
-                            <el-input type="textarea"></el-input>
+                            <el-input placeholder="请输入备注" type="textarea"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -269,6 +277,64 @@
                 下一步
             </el-button>
         </div>
+        <el-dialog
+            ref="dialogAddUnit"
+            :visible.sync="dialogAddUnit.visible"
+            top="40px"
+            title="添加乙方单位"
+            width="750px"
+            @closed="resetForm('dialogAddUnit.form')"
+        >
+            <el-form
+                ref="dialogAddUnit.form"
+                :inline="true"
+                :model="dialogAddUnit.form"
+                label-position="left"
+                class="form"
+                size="small"
+                label-width="100px"
+            >
+                <el-form-item label="乙方单位名称" prop="name">
+                    <el-input v-model.trim="dialogAddUnit.form.name" placeholder="请输入乙方单位名称"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="onSearchUnit">查询</el-button>
+                    <el-button type="default" @click="resetForm('dialogAddUnit.form')">重置</el-button>
+                </el-form-item>
+            </el-form>
+            <el-table
+                v-loading="dialogAddUnit.tableLoading"
+                :data="dialogAddUnit.tableData"
+                class="table"
+                max-height="300"
+                highlight-current-row
+                style="margin-top: 20px"
+                border
+                @current-change="onCurrentChange"
+            >
+                <el-table-column label="选择" width="50">
+                    <template slot-scope="scope">
+                        <el-radio
+                            :label="scope.row"
+                            v-model="dialogAddUnit.currentData"
+                            class="no-label"
+                        ></el-radio>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="unitId" label="单位编号"></el-table-column>
+                <el-table-column prop="unitName" label="单位名称"></el-table-column>
+            </el-table>
+            <div slot="footer" class="dialog-footer">
+                <el-button size="small" @click="dialogAddUnit.visible=false">取 消</el-button>
+                <el-button
+                    :loading="dialogAddUnit.loading"
+                    size="small"
+                    type="primary"
+                    @click="addUnitConfirm"
+                >确 定
+                </el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -281,17 +347,18 @@ export default {
     },
     data() {
         return {
-            step: 1,
-            whiteList: [],
-            validTime: [],
-            pageType: '1',
-            activityId: '',
+            dialogAddUnit: {
+                form: {
+                    name: '乙方单位',
+                },
+                currentData: {},
+                tableLoading: false,
+                loading: false,
+                visible: false
+            },
             loading: false,
             submitLoading: false,
-            fileList: [],
-            dialogImageUrl: '',
-            dialogVisible: false,
-            dialogPicturePreview: false
+            fileList: []
         }
     },
     computed: {
@@ -300,6 +367,33 @@ export default {
         }),
     },
     methods: {
+        onCurrentChange(data) {
+            const me = this
+            let {dialogAddUnit} = me
+            dialogAddUnit.currentData = data
+        },
+        addUnit() {
+            this.dialogAddUnit.visible = true
+            this.$nextTick(() => {
+                this.dialogAddUnit.form.name = this.form.unitName
+                this.dialogAddUnit.tableData = [
+                    {
+                        unitName: '测试乙方单位',
+                        unitId: '测试乙方id'
+                    }
+                ]
+            })
+        },
+        onSearchUnit() {
+        },
+        addUnitConfirm() {
+            if (!this.dialogAddUnit.currentData.unitId) {
+                this.$message.warning(`请选择乙方单位`)
+                return false
+            }
+            this.form.unitName = this.dialogAddUnit.currentData.unitName
+            this.dialogAddUnit.visible = false
+        },
         next() {
             this.$store.commit('CONTRACT_ADD_NEXT_STEP',2)
         },
@@ -394,14 +488,17 @@ export default {
             console.log(data)
         },
 
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url
-            this.dialogPicturePreview = true
-        },
     }
 
 
 }
 </script>
 <style lang='scss' scoped rel='stylesheet/scss'>
+    .no-label {
+        /deep/ {
+            .el-radio__label {
+                display: none;
+            }
+        }
+    }
 </style>

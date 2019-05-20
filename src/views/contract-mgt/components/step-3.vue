@@ -22,8 +22,8 @@
                         <el-col :span="24">
                             <el-button type="primary" size="small">下载模板</el-button>
                             <el-button type="primary" size="small">批量导入</el-button>
-                            <el-button type="primary" size="small" @click="add">新增</el-button>
-                            <el-button type="primary" size="small" @click="del">删除</el-button>
+                            <el-button type="primary" icon="el-icon-plus" size="small" @click="add">新增</el-button>
+                            <el-button type="primary" icon="el-icon-delete" size="small" @click="del">删除</el-button>
                         </el-col>
                     </el-row>
                     <el-table
@@ -41,16 +41,6 @@
                 </el-row>
             </form-box>
         </el-form>
-        <div class="btn-box">
-            <el-button size="small" @click="back">上一步</el-button>
-            <el-button
-                size="small"
-                type="primary"
-                @click="next()"
-            >
-                下一步
-            </el-button>
-        </div>
         <el-dialog
             ref="dialogAdd"
             :visible.sync="dialogAdd.visible"
@@ -104,7 +94,7 @@
 </template>
 <script>
 import {mapState} from 'vuex'
-import FormBox from './form-box'
+import FormBox from '@/components/form-box'
 
 export default {
     components: {
@@ -174,7 +164,7 @@ export default {
         },
         onSubmit() {
             this.$refs['dialogAdd.form'].validate((valid) => {
-                if (!valid) return false
+                //if (!valid) return false
                 this.$message({
                     type: 'success',
                     message: '操作成功'
@@ -193,10 +183,10 @@ export default {
 
         },
         next() {
-            this.$store.commit('CONTRACT_ADD_NEXT_STEP', 4)
+            this.$store.commit('contractMgt/next', 4)
         },
         back() {
-            this.$store.commit('CONTRACT_ADD_NEXT_STEP', 2)
+            this.$store.commit('contractMgt/next', 2)
         },
         init() {
             const me = this

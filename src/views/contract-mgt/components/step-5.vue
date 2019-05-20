@@ -37,16 +37,6 @@
                 </el-row>
             </form-box>
         </el-form>
-        <div class="btn-box">
-            <el-button size="small" @click="back">上一步</el-button>
-            <el-button
-                size="small"
-                type="primary"
-                @click="done()"
-            >
-                完成
-            </el-button>
-        </div>
         <el-dialog
             ref="dialogAdd"
             :visible.sync="dialogAdd.visible"
@@ -100,7 +90,7 @@
 </template>
 <script>
 import {mapState} from 'vuex'
-import FormBox from './form-box'
+import FormBox from '@/components/form-box'
 
 export default {
     components: {
@@ -201,7 +191,7 @@ export default {
                 this.$router.push({
                     name:'ContractList'
                 })
-                this.$store.commit('CONTRACT_ADD_DONE')
+                this.$store.commit('contractMgt/addDone')
             }).catch(() => {
                 this.$message({
                     type: 'info',
@@ -210,7 +200,7 @@ export default {
             })
         },
         back() {
-            this.$store.commit('CONTRACT_ADD_NEXT_STEP', 4)
+            this.$store.commit('contractMgt/next', 4)
         },
         init() {
             const me = this
@@ -313,7 +303,8 @@ export default {
 }
 </script>
 <style lang='scss' scoped rel='stylesheet/scss'>
-    @import "../../../styles/variables";
+    @import "~@/styles/variables";
+    @import "~@/styles/mixin";
     
     .tip {
         font-size: 14px;

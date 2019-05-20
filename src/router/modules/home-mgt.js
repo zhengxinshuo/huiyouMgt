@@ -5,7 +5,7 @@ export default {
     component: Layout,
     redirect: '/home-mgt/index',
     name: 'HomeMgt',
-    meta: { title: '主页', icon: 'activity-mgt' },
+    meta: { title: '主页', icon: 'home-mgt' },
     children: [
         {
             path: 'index',

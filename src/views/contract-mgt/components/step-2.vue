@@ -22,8 +22,8 @@
                         <el-col :span="24">
                             <el-button type="primary" size="small">下载模板</el-button>
                             <el-button type="primary" size="small">批量导入</el-button>
-                            <el-button type="primary" size="small" @click="add">新增</el-button>
-                            <el-button type="primary" size="small" @click="del">删除</el-button>
+                            <el-button type="primary" icon="el-icon-plus" size="small" @click="add">新增</el-button>
+                            <el-button type="primary" icon="el-icon-delete" size="small" @click="del">删除</el-button>
                         </el-col>
                     </el-row>
                     <el-table
@@ -44,16 +44,6 @@
                 </el-row>
             </form-box>
         </el-form>
-        <div class="btn-box">
-            <el-button size="small" @click="back">上一步</el-button>
-            <el-button
-                size="small"
-                type="primary"
-                @click="next()"
-            >
-                下一步
-            </el-button>
-        </div>
         <el-dialog
             ref="dialogAdd"
             :visible.sync="dialogAdd.visible"
@@ -135,7 +125,7 @@
 </template>
 <script>
 import {mapState} from 'vuex'
-import FormBox from './form-box'
+import FormBox from '@/components/form-box'
 
 export default {
     components: {
@@ -224,10 +214,10 @@ export default {
 
         },
         next() {
-            this.$store.commit('CONTRACT_ADD_NEXT_STEP', 3)
+            this.$store.commit('contractMgt/next', 3)
         },
         back() {
-            this.$store.commit('CONTRACT_ADD_NEXT_STEP', 1)
+            this.$store.commit('contractMgt/next', 1)
         },
         init() {
             const me = this

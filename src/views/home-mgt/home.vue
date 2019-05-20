@@ -1,5 +1,5 @@
 <template>
-    <div class="home-container">
+    <div class="page-container">
         <el-row :gutter="10" class="row--1">
             <el-col :span="11">
                 <div class="box">
@@ -272,9 +272,7 @@ export default {
         }
     }
     
-    .home-container {
-        padding: 20px;
-    }
+  
     
     .el-row {
         & + .el-row {

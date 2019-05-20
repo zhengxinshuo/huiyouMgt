@@ -30,6 +30,7 @@ $c-primary: #409EFF;
 $c-success: #67C23A;
 $c-warning: #E6A23C;
 $c-danger: #F56C6C;
+$c-error: #F56C6C;
 $c-info: #909399;
 // 字体颜色
 $c-font-strong: #409EFF; //突出
@@ -56,4 +57,10 @@ $spacing-md: 20px;
 $spacing-lg: 30px;
 
 $scrollbar-width: 8px;
+//step步骤跳
+$c-step-line-default:#E4E4E4;
+$c-step-bg-process:#C0C4CC;
+$c-step-line-success:#67C23A;
+$step-line-top:15px;
+$step-line-space:20%;
 

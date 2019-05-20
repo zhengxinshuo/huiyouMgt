@@ -24,7 +24,6 @@ export default {
     @import "../../styles/mixin";
     
     .step-list {
-        padding: 20px 0;
         @include flex(flex-start, center);
         .step {
             position: relative;

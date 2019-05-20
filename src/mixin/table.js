@@ -1,6 +1,7 @@
 export default {
     data() {
         return {
+            tableSelection:[],
             tableLoading: false, // 表格是否加载
             tableData: [], // 表格数据
             page: { // 分页数据
@@ -15,6 +16,9 @@ export default {
         // 重置表单
         resetForm(formName) {
             this.$refs[formName].resetFields()
+        },
+        onTableSelectionChange(val) {
+            this.tableSelection = val
         },
         // 当 pageSize 改变时
         onSizeChange(val) {

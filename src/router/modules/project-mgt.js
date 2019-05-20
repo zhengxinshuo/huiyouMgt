@@ -3,54 +3,54 @@ import Layout from '@/views/layout'
 export default {
     path: '/project-mgt',
     component: Layout,
-    redirect: '/project-mgt/project-audit-list',
+    redirect: '/project-mgt/audit/list',
     name: 'ProjectMgt',
-    meta: { title: '项目管理', icon: 'activity-mgt' },
+    meta: { title: '项目管理', icon: 'project-mgt' },
     children: [
         {
-            path: 'project-audit-list',
+            path: 'audit/list',
             name: 'ProjectAuditList',
-            component: () => import('@/views/project-mgt/project-audit-list'),
-            meta: { title: '立项审批' }
+            component: () => import('@/views/project-mgt/audit/list'),
+            meta: { title: '立项审批' },
         },
         {
-            path: 'project-list',
-            name: 'ProjectList',
-            component: () => import('@/views/project-mgt/project-list'),
-            meta: { title: '项目列表' }
-        },
-        {
-            path: 'project-detail',
-            name: 'ProjectDetail',
+            path: 'audit/detail',
+            name: 'ProjectAuditDetail',
             hidden: true,
-            component: () => import('@/views/project-mgt/project-detail'),
+            component: () => import('@/views/project-mgt/audit/detail'), // Parent router-view
             meta: {
                 title: '项目详情',
                 insertRoute: {
-                    name: 'ProjectList',
-                    path: '/project-mgt/project-list',
-                    meta: {title: '所有项目'}
+                    name: 'ProjectAuditList',
+                    path: '/project-mgt/audit/list',
+                    meta: { title: '立项审批' }
                 }
             }
         },
         {
-            path: 'project-add',
-            name: 'ProjectAdd',
-            component: () => import('@/views/project-mgt/project-add'),
+            path: 'audit/add',
+            name: 'ProjectAuditAdd',
             hidden: true,
+            component: () => import('@/views/project-mgt/audit/add'), // Parent router-view
             meta: {
-                title: '新建项目',
                 insertRoute: {
-                    name: 'ProjectList',
-                    path: '/project-mgt/project-list',
-                    meta: {title: '所有项目'}
-                }
+                    name: 'ProjectAuditList',
+                    path: '/project-mgt/audit/list',
+                    meta: { title: '立项审批' }
+                },
+                title: '新建项目',
             }
         },
         {
-            path: 'project-draft-list',
+            path: 'project/list',
+            name: 'ProjectList',
+            component: () => import('@/views/project-mgt/project/list'),
+            meta: { title: '项目列表' }
+        },
+        {
+            path: 'draft/list',
             name: 'ProjectDraftList',
-            component: () => import('@/views/project-mgt/project-draft-list'),
+            component: () => import('@/views/project-mgt/draft/list'),
             meta: { title: '草稿箱' }
         },
     ]

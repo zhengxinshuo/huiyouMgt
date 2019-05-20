@@ -31,11 +31,36 @@ export default {
             let matched = this.$route.matched.filter(item => item.name)
 
             const first = matched[0]
-            if (first && first.name !== 'dashboard') {
-                matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
-            }
+            /*   if (first && first.name !== 'dashboard') {
+                   matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
+               }
+   */
+            _decorate(matched)
+            
+            //this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
+            
+            this.levelList = matched
 
-            this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
+            /**
+             * 针对特殊需求，封装一个装饰函数
+             * 路由为2级，但是业务需求面包屑可能需要三层
+             * */
+            function _decorate(arr) {
+                if (!arr) return false
+                let insertIndex
+                let insertItem
+                arr.forEach((item, index) => {
+                    if (item.meta.insertRoute) {
+                        insertIndex = index
+                        insertItem = item.meta.insertRoute
+                    }
+                })
+                if (insertItem) {
+                    arr.splice(insertIndex, 0, insertItem)
+                }
+            }
+            
+            
         },
         pathCompile(path) {
             // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561

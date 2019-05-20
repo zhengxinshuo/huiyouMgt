@@ -1,46 +1,87 @@
-const user = {
+import { Message, MessageBox } from 'element-ui'
+export default {
+    namespaced: true,
     state: {
-        step1Data:{
+        step1Data: {
             name: '',
             id: '',
             value: '',
-            unitName:'',
+            unitName: '',
             time: '',
             radio: ''
         },
-        step2Data:{
+        step2Data: {
             name: '',
             id: '',
             value: '',
             time: '',
             radio: ''
         },
-        step3Data:{},
-        step4Date:{},
-        step5Date:{},
-        step:1
+        step3Data: {},
+        step4Date: {},
+        step5Date: {},
+        step: 1
     },
 
     mutations: {
-        CONTRACT_ADD_NEXT_STEP:(state,val)=>{
+        next: (state, val) => {
             state.step = val
         },
-        SET_ROLES: (state, roles) => {
-            state.roles = roles
-        },
-        CONTRACT_ADD_DONE:(state)=>{
+        addDone: (state) => {
             state.step = 1
         }
-
     },
 
     actions: {
         // 登录
-        Login({commit}, userInfo) {
+        saveDraft({commit}) {
+            Message({ message: '保存成功', type: 'success' })
         },
-        // 下一步
+        // init
+        clear({commit,state}){
+            state.step=1
+            state.step1Data = {
+                name: '',
+                id: '',
+                value: '',
+                unitName: '',
+                time: '',
+                radio: ''
+            }
+            state.step2Data = {
+                name: '',
+                id: '',
+                value: '',
+                unitName: '',
+                time: '',
+                radio: ''
+            }
+            state.step3Data = {
+                name: '',
+                id: '',
+                value: '',
+                unitName: '',
+                time: '',
+                radio: ''
+            }
+            state.step4Data = {
+                name: '',
+                id: '',
+                value: '',
+                unitName: '',
+                time: '',
+                radio: ''
+            }
+            state.step5Data = {
+                name: '',
+                id: '',
+                value: '',
+                unitName: '',
+                time: '',
+                radio: ''
+            }
 
+
+        }
     }
 }
-
-export default user

@@ -3,54 +3,57 @@ import Layout from '@/views/layout'
 export default {
     path: '/contract-mgt',
     component: Layout,
-    redirect: '/contract-mgt/contract-list',
+    redirect: '/contract-mgt/contract/list',
     name: 'ContractMgt',
-    meta: { title: '合同管理', icon: 'activity-mgt' },
+    meta: { title: '合同管理', icon: 'contract-mgt' },
     children: [
         {
-            path: 'contract-list',
+            path: 'contract/list',
+            component: () => import('@/views/contract-mgt/contract/list'), // Parent router-view
             name: 'ContractList',
-            component: () => import('@/views/contract-mgt/contract-list'),
-            meta: { title: '所有合同' }
+            meta: { title: '所有合同',}
         },
         {
-            path: 'contract-detail',
+            path: 'contract/detail',
             name: 'ContractDetail',
             hidden: true,
-            component: () => import('@/views/contract-mgt/contract-detail'),
+            component: () => import('@/views/contract-mgt/contract/detail'),
             meta: {
                 title: '合同详情',
                 insertRoute: {
                     name: 'ContractList',
-                    path: '/contract-mgt/contract-list',
-                    meta: {title: '所有合同'}
+                    path: '/contract-mgt/contract/list',
+                    meta: { title: '所有合同' }
                 }
             }
         },
         {
-            path: 'contract-add',
+            path: 'contract/add',
             name: 'ContractAdd',
-            component: () => import('@/views/contract-mgt/contract-add'),
+            component: () => import('@/views/contract-mgt/contract/add'),
             hidden: true,
             meta: {
                 title: '新建合同',
                 insertRoute: {
                     name: 'ContractList',
-                    path: '/contract-mgt/contract-list',
-                    meta: {title: '所有合同'}
+                    path: '/contract-mgt/contract/list',
+                    meta: { title: '所有合同' }
                 }
             }
         },
+
+
+
         {
-            path: 'contract-draft-list',
+            path: 'draft/list',
             name: 'ContractDraftList',
-            component: () => import('@/views/contract-mgt/contract-draft-list'),
+            component: () => import('@/views/contract-mgt/draft/list'),
             meta: { title: '草稿箱' }
         },
         {
-            path: 'contract-audit-list',
+            path: 'audit/list',
             name: 'ContractAuditList',
-            component: () => import('@/views/contract-mgt/contract-audit-list'),
+            component: () => import('@/views/contract-mgt/audit/list'),
             meta: { title: '待审核' }
         },
     ]

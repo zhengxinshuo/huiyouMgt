@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg aria-hidden="true" class="svg-icon">
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-consuming">
+        <svg class="icon" viewBox="0 0 1024 1024" id="icon-consuming" width="100%" height="100%">
+            <path d="M912.5 114v765h-765V114h765zM721.2 687.7h95.6v-95.6h-95.6v95.6zM530 783.3h95.6v-95.6H530v95.6z m0-191.2h95.6v-95.6H530v95.6zM338.7 783.3h95.6v-95.6h-95.6v95.6z m-95.6-382.4h95.6v95.6h95.6v-95.6h382.5V209.6H243.1v191.3z m0 0"></path>
+        </svg>
+    </use>
+</svg>

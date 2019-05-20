@@ -46,3 +46,175 @@
         background: #fff;
     }
 }
+
+//el-radio
+.no-label {
+    .el-radio__label {
+        display: none;
+    }
+}
+
+//步骤条
+.el-steps {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.el-step {
+    position: relative;
+    &__main {
+    }
+    &__head {
+        position: relative;
+        &.is-finish {
+            color: white;
+            .el-step__icon {
+                background: $c-theme;
+                border-color: $c-theme;
+                &.is-icon {
+                    background: transparent;
+                    color: $c-theme;
+                }
+            }
+            .el-step__line {
+                &-inner {
+                    border-color: $c-theme;
+                }
+            }
+        }
+        &.is-wait, &.is-process {
+            color: $c-step-bg-process;
+            .el-step__icon {
+                background: white;
+                border-color: $c-step-bg-process;
+                &.is-icon {
+                    background: transparent;
+                    color: $c-step-bg-process;
+                }
+            }
+        }
+        &.is-success {
+            color: white;
+            .el-step__icon {
+                background: $c-step-line-success;
+                border-color: $c-step-line-success;
+            }
+
+        }
+        &.is-error {
+            color: white;
+            .el-step__icon {
+                background: $c-error;
+                border-color: $c-error;
+            }
+
+        }
+    }
+    &__line {
+        @include stepLineDash();
+        &-inner {
+        }
+    }
+    &__icon {
+        width: 30px;
+        height: 30px;
+
+        &.is-text {
+
+        }
+        &-inner {
+        }
+    }
+    &__title {
+        /* &.is-process{
+             font-weight: normal;
+             color: $c-font-sub-text;
+         }*/
+        &.is-wait, &.is-process {
+            color: $c-font-mark;
+            font-weight: normal;
+        }
+    }
+    &__description {
+        &.is-wait, &.is-process {
+            color: $c-font-mark;
+        }
+    }
+    &.is-horizontal {
+        .el-step__head {
+        }
+        .el-step__line {
+            height: 1px;
+            position: relative;
+            &-inner {
+                border-bottom-width: 0 !important;
+            }
+        }
+        &:first-of-type {
+            .el-step__head {
+                position: relative;
+                &:before {
+                    position: absolute;
+                    top: $step-line-top;
+                    width: 60%;
+                    height: 1px;
+                    right: calc(70%);
+                    background: $c-theme;
+                    content: '';
+                    display: block;
+                }
+                &.is-success {
+                    &:before {
+                        background: $c-step-line-success;
+                    }
+                }
+            }
+        }
+        &:last-of-type {
+            .el-step__head {
+                position: relative;
+                &:before {
+                    position: absolute;
+                    top: $step-line-top;
+                    width: 60%;
+                    height: 1px;
+                    left: calc(70%);
+                    content: '';
+                    display: block;
+                    @include stepLineDash()
+                }
+                &.is-finish {
+                    &:before {
+                        background: $c-theme;
+                    }
+                }
+            }
+        }
+    }
+    &.is-center {
+        .el-step__line {
+            top: $step-line-top;
+        }
+        .el-step__line {
+            margin: 0 $step-line-space !important;
+        }
+    }
+    &.is-vertical {
+        .el-step__head {
+            width: 30px;
+        }
+        .el-step__title {
+            line-height: 30px;
+        }
+        .el-step__line {
+            left: 14px;
+            width: 1px;
+            top: 40px;
+            bottom: 10px;
+            @include stepLineDash(vertical);
+            &-inner {
+                border-left-width: 0 !important;
+            }
+        }
+    }
+}

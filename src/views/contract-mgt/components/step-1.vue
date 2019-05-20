@@ -13,7 +13,7 @@
                 <el-row class="form-row">
                     <el-col :span="24">
                         <el-form-item :rules="{required:true,message:'请输入合同名称'}" prop="name" label="合同名称">
-                            <el-input v-model="form.name" placeholder="请输入合同名称" class="short" clearable></el-input>
+                            <el-input v-model="form.name" placeholder="请输入合同名称" class="flex-w" clearable></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -129,10 +129,10 @@
                         <el-form-item label="服务响应时间">
                             <el-row :gutter="20">
                                 <el-col :span="10">
-                                    <el-input placeholder="请输入" class="short"></el-input>
+                                    <el-input placeholder="请输入" class="flex-w"></el-input>
                                 </el-col>
                                 <el-col :span="10">
-                                    <el-select v-model="form.value" class="short" clearable>
+                                    <el-select v-model="form.value" class="flex-w" clearable>
                                         <el-option label="小时" value="全部"></el-option>
                                     </el-select>
                                 </el-col>
@@ -143,10 +143,10 @@
                         <el-form-item label="故障解决时间">
                             <el-row :gutter="20">
                                 <el-col :span="10">
-                                    <el-input placeholder="请输入" class="short"></el-input>
+                                    <el-input placeholder="请输入" class="flex-w"></el-input>
                                 </el-col>
                                 <el-col :span="10">
-                                    <el-select v-model="form.value" class="short" clearable>
+                                    <el-select v-model="form.value" class="flex-w" clearable>
                                         <el-option label="小时" value="全部"></el-option>
                                     </el-select>
                                 </el-col>
@@ -267,16 +267,6 @@
                 </el-row>
             </form-box>
         </el-form>
-        <div class="btn-box">
-            <el-button size="small" @click="$router.go(-1)">返回</el-button>
-            <el-button
-                size="small"
-                type="primary"
-                @click="next()"
-            >
-                下一步
-            </el-button>
-        </div>
         <el-dialog
             ref="dialogAddUnit"
             :visible.sync="dialogAddUnit.visible"
@@ -298,7 +288,7 @@
                     <el-input v-model.trim="dialogAddUnit.form.name" placeholder="请输入乙方单位名称"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSearchUnit">查询</el-button>
+                    <el-button type="primary" icon="el-icon-search" @click="onSearchUnit">查询</el-button>
                     <el-button type="default" @click="resetForm('dialogAddUnit.form')">重置</el-button>
                 </el-form-item>
             </el-form>
@@ -339,7 +329,7 @@
 </template>
 <script>
 import {mapState} from 'vuex'
-import FormBox from './form-box'
+import FormBox from '@/components/form-box'
 
 export default {
     components: {
@@ -395,7 +385,7 @@ export default {
             this.dialogAddUnit.visible = false
         },
         next() {
-            this.$store.commit('CONTRACT_ADD_NEXT_STEP',2)
+            this.$store.commit('contractMgt/next',2)
         },
         init() {
             const me = this
@@ -483,11 +473,7 @@ export default {
             if (index !== -1) {
                 this.form.list.splice(index, 1)
             }
-        },
-        changeHandle(data) {
-            console.log(data)
-        },
-
+        }
     }
 
 

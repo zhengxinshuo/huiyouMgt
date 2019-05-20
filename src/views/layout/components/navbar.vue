@@ -147,7 +147,7 @@ export default {
         },
         onSubmit(){
             this.$refs['dialogUser.form'].validate((valid) => {
-                if (!valid) return false
+                //if (!valid) return false
                 this.$message({
                     type: 'success',
                     message: '操作成功'
@@ -163,7 +163,7 @@ export default {
             })
 
             this.$refs[formName].validate((valid) => {
-                if (!valid) return false
+                //if (!valid) return false
                 me[dialogName].loading = true
                 this[`${field}Confirm`]().then(res => {
                     me[dialogName].loading = false
@@ -199,6 +199,7 @@ export default {
     .navbar {
         position: relative;
         height: 50px;
+        background: white;
         line-height: 50px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
         .hamburger-container {
